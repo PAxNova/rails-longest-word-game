@@ -1,2 +1,9 @@
-<h1>Games#score</h1>
-<p>Find me in app/views/games/score.html.erb</p>
+<!-- app/views/games/score.html.erb -->
+<div class="container">
+  <h1>Résultat</h1>
+  <p><%= @message %></p>
+  <% if @score %>
+    <p>Votre score: <%= @score %></p>
+  <% end %>
+  <%= link_to "Nouvelle Partie", new_path, class: "btn btn-primary" %>
+</div>
