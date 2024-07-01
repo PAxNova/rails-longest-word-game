@@ -6,6 +6,7 @@ class GamesController < ApplicationController
 
   def new
     @letters = Array.new(10) { ('A'..'Z').to_a.sample }
+    session[:score] ||= 0
   end
 
   def score
@@ -24,6 +25,8 @@ class GamesController < ApplicationController
       @score = @word.length
       session[:score] = (session[:score] || 0) + @score
     end
+
+    render :score
   end
 
   private

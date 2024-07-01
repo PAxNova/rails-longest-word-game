@@ -1,16 +1,21 @@
 <!-- app/views/games/new.html.erb -->
-<div class="container">
-  <h1>Le mot le plus long</h1>
-  <p>Trouvez le mot le plus long possible en utilisant les lettres suivantes :</p>
-  <p><%= @letters.join(" ") %></p>
+<h1>Let's Play!</h1>
+<p>Votre score actuel est <%= session[:score] %></p>
 
-  <%= form_tag score_path, method: :post, data: { turbo: false } do %>
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <%= hidden_field_tag :letters, @letters.join(" ") %>
-    <div class="form-group">
-      <%= label_tag :word, "Votre mot" %>
-      <%= text_field_tag :word, nil, class: "form-control" %>
-    </div>
-    <%= submit_tag "Soumettre", class: "btn btn-primary mt-2" %>
-  <% end %>
-</div>
+<%= form_with url: score_path, method: :post, local: true do %>
+  <div>
+    <p>Grille de lettres : <%= @letters.join(' ') %></p>
+    <%= hidden_field_tag :letters, @letters.join(' ') %>
+  </div>
+  <div>
+    <%= label_tag :word, "Votre mot:" %>
+    <%= text_field_tag :word %>
+  </div>
+  <div>
+    <%= submit_tag "Valider le mot" %>
+  </div>
+<% end %>
+
+<% if @message %>
+  <p><%= @message %></p>
+<% end %>
